@@ -12,7 +12,12 @@ class PostViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         data = serializer.validated_data
-        post = services.create_post(author=self.request.user, title=data['title'])
+        post = services.create_post(
+            author=self.request.user, 
+            title=data.get('title', ''), 
+            content=data.get('content', '')
+        )
+
         serializer.instance = post
     
     def perform_update(self, serializer):
