@@ -18,4 +18,8 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         instance = serializer.instance
         data = serializer.validated_data
-        services.update_post(instance, data.get('title', instance.title)), data.get('content', instance.content)
+        services.update_post(
+            instance, 
+            data.get('title', instance.title), 
+            data.get('content', instance.content)
+        )
